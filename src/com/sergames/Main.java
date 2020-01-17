@@ -36,7 +36,7 @@ public class Main extends JPanel {
         Main game = new Main();
         frame.add(game);
         frame.setIconImage(new ImageIcon("a.png").getImage());
-        frame.setSize(400, 600);
+        frame.setSize(Const.WIDTH, Const.HEIGHT);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         while (true) {

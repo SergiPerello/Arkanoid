@@ -3,39 +3,45 @@ package com.sergames;
 import java.awt.*;
 
 public class Ball {
-
-
-
-    private static final int DIAMETER = 25;
-    int x = 100;
-    int y = 100;
-    int xa = 1;
-    int ya = 1;
+    private final int size = 25;
+    private int x, y;
+    private int dirX, dirY;
     private Main game;
 
     public Ball(Main game) {
         this.game = game;
+        this.x = Const.WIDTH / 2;
+        this.y = Const.HEIGHT / 2;
+        this.dirX = 1;
+        this.dirY = 1;
     }
 
     void move() {
-        if (x + xa < 0)
-            xa = game.speed;
-        else if (x + xa > game.getWidth() - DIAMETER)
-            xa = -game.speed;
-        else if (y + ya < 0)
-            ya = game.speed;
-        else if (y + ya > game.getHeight() - DIAMETER)
+        this.x = this.x + this.dirX;
+        this.y = this.y + this.dirY;
+
+        //walls collision
+        if (this.x + this.dirX < 0)
+            this.dirX = game.speed;
+        else if (this.x + this.dirX + this.size > Const.WIDTH)
+            this.dirX = -game.speed;
+        else if (this.y + this.dirY < 0)
+            this.dirY = game.speed;
+        else if (this.y + this.dirY + this.size > Const.HEIGHT)
             game.gameOver();
-        else if (collisionPaddle()) {
-            ya = -game.speed;
-            y = game.paddle.getTopY() - DIAMETER;
+
+        //item collision
+        if (collisionPaddle()) {
+            this.dirY = -game.speed;
+            this.y = game.paddle.getTopY() - this.size;
             //game.speed++;
-        } else if (collisionBrick()) {
-            ya = -game.speed;
-            y = game.brick.getTopY() -DIAMETER;
         }
-        x = x + xa;
-        y = y + ya;
+        if (collisionBrick()) {
+            if (game.brick.getTopY()>this.y){
+                this.dirY = -game.speed;
+            }
+        }
+
     }
 
     private boolean collisionBrick() {
@@ -47,10 +53,11 @@ public class Ball {
     }
 
     public void paint(Graphics2D g) {
-        g.fillOval(x, y, DIAMETER, DIAMETER);
+        g.setColor(Color.MAGENTA);
+        g.fillOval(this.x, this.y, this.size, this.size);
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(x, y, DIAMETER, DIAMETER);
+        return new Rectangle(x, y, this.size, this.size);
     }
 }

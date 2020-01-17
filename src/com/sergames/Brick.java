@@ -4,8 +4,8 @@ import java.awt.*;
 
 public class Brick {
     private static final int X = 50;
-    private static final int Y = 50;
-    private static final int WIDTH = 120;
+    private static final int Y = 100;
+    private static final int WIDTH = 150;
     private static final int HEIGHT = 20;
     private Main game;
 
@@ -22,11 +22,11 @@ public class Brick {
     }
 
     public int getTopY() {
-        return Y;
+        return Y + HEIGHT / 2;
     }
 
     public int getBotY() {
-        return Y + HEIGHT;
+        return Y - HEIGHT / 2;
     }
 
 }
