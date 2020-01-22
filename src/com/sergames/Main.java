@@ -10,7 +10,7 @@ public class Main extends JPanel {
     Ball ball = new Ball(this);
     Paddle paddle = new Paddle(this);
     Brick brick = new Brick(this);
-    int speed = 6;
+    int speed = 1;
 
     public Main() {
         addKeyListener(new KeyListener() {

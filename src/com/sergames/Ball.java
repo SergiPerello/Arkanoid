@@ -3,7 +3,7 @@ package com.sergames;
 import java.awt.*;
 
 public class Ball {
-    private final int size = 25;
+    private final int size = 15;
     private int x, y;
     private int dirX, dirY;
     private Main game;
@@ -36,12 +36,24 @@ public class Ball {
             this.y = game.paddle.getTopY() - this.size;
             //game.speed++;
         }
-        if (collisionBrick()) {
-            if (game.brick.getTopY()>this.y){
-                this.dirY = -game.speed;
-            }
-        }
+        if (collisionBrick()) { //Aquest metode m'ha portat 5 hores
+            //Brick dimensions
+            int topY = game.brick.getTopY();
+            int botY = game.brick.getBotY();
+            int rightX = game.brick.getRightX();
+            int leftX = game.brick.getLeftX();
 
+            if (this.y + size >= botY && (this.x <= rightX && this.x >= leftX)) {
+                this.dirY = game.speed;
+                System.out.println("Bot");
+            } else if (this.y < topY && (this.x <= rightX && this.x >= leftX)) {
+                this.dirY = -game.speed;
+                System.out.println("Top");
+            } else this.dirX = this.dirX > 0 ? -game.speed : game.speed;
+
+            /*if (this.x <= rightX && this.x >= leftX) this.dirY = this.y >= botY ? game.speed : -game.speed;
+            else this.dirX = this.dirX > 0 ? -game.speed : game.speed;*/
+        }
     }
 
     private boolean collisionBrick() {

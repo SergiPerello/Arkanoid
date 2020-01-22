@@ -3,10 +3,10 @@ package com.sergames;
 import java.awt.*;
 
 public class Brick {
-    private static final int X = 50;
-    private static final int Y = 100;
-    private static final int WIDTH = 150;
-    private static final int HEIGHT = 20;
+    private static final int x = 100;
+    private static final int y = 100;
+    private static final int width = 200;
+    private static final int height = 200;
     private Main game;
 
     public Brick(Main game) {
@@ -14,19 +14,26 @@ public class Brick {
     }
 
     public void paint(Graphics2D g) {
-        g.fillRect(X, Y, WIDTH, HEIGHT);
+        g.fillRect(x, y, width, height);
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(X, Y, WIDTH, HEIGHT);
+        return new Rectangle(x, y, width, height);
     }
 
     public int getTopY() {
-        return Y + HEIGHT / 2;
+        return y;
     }
 
     public int getBotY() {
-        return Y - HEIGHT / 2;
+        return y + height;
     }
 
+    public int getRightX() {
+        return x + width;
+    }
+
+    public int getLeftX() {
+        return x;
+    }
 }
