@@ -3,14 +3,16 @@ package com.sergames;
 import java.awt.*;
 
 public class Brick {
-    private static final int x = 100;
-    private static final int y = 100;
-    private static final int width = 200;
-    private static final int height = 200;
+    private int x;
+    private int y;
+    private int width = 80;
+    private int height = 20;
     private Main game;
 
-    public Brick(Main game) {
+    public Brick(Main game, int x, int y) {
         this.game = game;
+        this.x = x;
+        this.y = y;
     }
 
     public void paint(Graphics2D g) {

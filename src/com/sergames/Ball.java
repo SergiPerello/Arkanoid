@@ -12,18 +12,16 @@ public class Ball {
         this.game = game;
         this.x = Const.WIDTH / 2;
         this.y = Const.HEIGHT / 2;
-        this.dirX = 1;
-        this.dirY = 1;
+        this.dirX = game.speed;
+        this.dirY = game.speed;
     }
 
     void move() {
-        this.x = this.x + this.dirX;
-        this.y = this.y + this.dirY;
 
         //walls collision
         if (this.x + this.dirX < 0)
             this.dirX = game.speed;
-        else if (this.x + this.dirX + this.size > Const.WIDTH)
+        else if (this.x + this.dirX > Const.WIDTH - this.size * 2)
             this.dirX = -game.speed;
         else if (this.y + this.dirY < 0)
             this.dirY = game.speed;
@@ -54,10 +52,16 @@ public class Ball {
             /*if (this.x <= rightX && this.x >= leftX) this.dirY = this.y >= botY ? game.speed : -game.speed;
             else this.dirX = this.dirX > 0 ? -game.speed : game.speed;*/
         }
+
+        this.x = this.x + this.dirX;
+        this.y = this.y + this.dirY;
+
     }
 
     private boolean collisionBrick() {
-        return game.brick.getBounds().intersects(getBounds());
+        for (Brick item : game.bricks) {
+            return item.getBounds().intersects(getBounds());
+        }
     }
 
     private boolean collisionPaddle() {

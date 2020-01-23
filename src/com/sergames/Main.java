@@ -7,10 +7,13 @@ import java.awt.event.KeyListener;
 
 public class Main extends JPanel {
 
+    int speed = 2;
     Ball ball = new Ball(this);
     Paddle paddle = new Paddle(this);
-    Brick brick = new Brick(this);
-    int speed = 1;
+    Brick[] bricks = {
+            new Brick(this, 0, 100),
+            new Brick(this, 0, 300)
+    };
 
     public Main() {
         addKeyListener(new KeyListener() {
@@ -68,7 +71,7 @@ public class Main extends JPanel {
                 RenderingHints.VALUE_ANTIALIAS_ON);
         ball.paint(g2d);
         paddle.paint(g2d);
-        brick.paint(g2d);
+        for (Brick item : bricks) item.paint(g2d);
 
         g2d.setColor(Color.GRAY);
         g2d.setFont(new Font("Verdana", Font.BOLD, 30));
